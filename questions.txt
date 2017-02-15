@@ -1,0 +1,61 @@
+## CSE100
+## Jiaxin Yang
+## PA1 Questions
+
+Q1: 
+testBST.o	BSTInt.o	BSTNodeInt.o	bst
+
+Q2: 
+Result:
+g++      -g -Wall -std=c++11 -c BSTInt.cpp
+BSTInt.cpp: In function 'bool insert(int)':
+BSTInt.cpp:25:8: error: 'root' was not declared in this scope
+   if (!root) {
+        ^
+BSTInt.cpp:27:7: error: 'isize' was not declared in this scope
+     ++isize;
+       ^
+BSTInt.cpp:31:22: error: 'root' was not declared in this scope
+   BSTNodeInt* curr = root;
+                      ^
+BSTInt.cpp:56:5: error: 'isize' was not declared in this scope
+   ++isize;
+     ^
+make: *** [BSTInt.o] Error 1
+
+The compiler cannot find the declaration of those variables, because the
+removed part was the name of the class, which contains the above variables,
+removing the namespace makes the compiler not knows where to find the
+variables.
+
+Q3: 
+The insert function does not return false if an item already existed in the
+tree.
+
+Q4:
+First, I looked at the description comment for each function and find out what
+is the purpose of these functions.
+Then, I looked at the tester cases and see if all cases are being tested, which
+I found that the tester does not test two cases: insert existed item for insert
+function and find not existed item for find function.
+After adding those two cases in tester, I compile and run the tester again and
+the result shows the code has a bug in insert function, which does not return
+false if an item already existed in the tree.
+
+Q5:
+The insert method in BSTInt.h passes its argument by value while the insert
+method in BST.hpp passes its argument by reference.
+In BSTInt.h, the argument for insert method is Int type, the function does not
+want to modify the parameter and the value is easy to copy. So it passes 
+argument by value. But in BST.hpp, the argument is Data type, which is 
+expensive to copy, so it passes its argument by reference. 
+
+Q6:
+sorted file produces taller trees.
+
+Q7:
+The height for sorted BST is n-1 and the height for random BST is O(logn)
+For sorted BST, every next input goes to next level of height. Therefore for 
+size of n BST, the height will be n-1. 
+Cite: Philippe Flajolet "Journal of Computer and System Science" 171 - 213 (1982) 
+
